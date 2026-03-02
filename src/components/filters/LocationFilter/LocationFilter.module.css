@@ -1,0 +1,24 @@
+.filterGroup {
+  margin-bottom: 24px;
+}
+
+.filterLabel {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #475467;
+  margin-bottom: 8px;
+}
+
+.locationInput {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #dadde1;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.locationInput:focus {
+  outline: none;
+  border-color: #e44848;
+}

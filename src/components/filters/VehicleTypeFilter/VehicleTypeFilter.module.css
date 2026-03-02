@@ -1,0 +1,35 @@
+.filterGroup {
+  margin-bottom: 24px;
+}
+
+.filterTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #101828;
+  margin-bottom: 16px;
+}
+
+.vehicleTypes {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.typeButton {
+  padding: 10px 20px;
+  border: 1px solid #dadde1;
+  border-radius: 8px;
+  background: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.typeButton:hover {
+  border-color: #e44848;
+}
+
+.typeButton.active {
+  background-color: #e44848;
+  color: white;
+  border-color: #e44848;
+}

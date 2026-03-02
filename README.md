@@ -1,16 +1,30 @@
-# React + Vite
+# TravelTrucks - Karavan Kiralama Uygulaması
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+TravelTrucks, karavan kiralama hizmeti sunan bir web uygulamasıdır. Kullanıcılar farklı karavan modellerini görüntüleyebilir, filtreleyebilir ve rezervasyon yapabilir.
 
-Currently, two official plugins are available:
+## Özellikler
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 🚐 Karavan kataloğu görüntüleme
+- 🔍 Konum, araç tipi ve ekipmana göre filtreleme
+- ❤️ Favorilere ekleme (localStorage'da saklanır)
+- 📸 Karavan detay sayfası ve fotoğraf galerisi
+- ⭐ Kullanıcı yorumları ve derecelendirme
+- 📅 Rezervasyon formu
+- 📱 Responsive tasarım
+- 🔄 Sayfalama (Load More)
 
-## React Compiler
+## Kullanılan Teknolojiler
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React 18
+- Redux Toolkit (State yönetimi)
+- React Router DOM (Sayfa yönlendirme)
+- Axios (API istekleri)
+- Vite (Build tool)
+- CSS Modules (Stil)
 
-## Expanding the ESLint configuration
+## Kurulum
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. Repoyu klonlayın:
+```bash
+git clone https://github.com/kullaniciadi/traveltrucks.git
+cd traveltrucks

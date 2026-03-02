@@ -1,0 +1,46 @@
+.catalogPage {
+  padding: 40px 0;
+  min-height: calc(100vh - 80px - 72px);
+}
+
+.catalogLayout {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 40px;
+}
+
+.filtersSidebar {
+  position: sticky;
+  top: 100px;
+  height: fit-content;
+  padding: 24px;
+  background-color: white;
+  border: 1px solid #dadde1;
+  border-radius: 12px;
+}
+
+.filtersTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: #101828;
+  margin-bottom: 24px;
+}
+
+.catalogMain {
+  min-height: 400px;
+}
+
+.loadMoreContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.noResults {
+  text-align: center;
+  color: #475467;
+  padding: 60px 20px;
+  font-size: 18px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+}

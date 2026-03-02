@@ -1,0 +1,50 @@
+.filterGroup {
+  margin-bottom: 24px;
+  border: 1px solid #eee;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.filterTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #101828;
+  margin-bottom: 16px;
+}
+
+.equipmentGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.equipmentButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 8px;
+  border: 1px solid #dadde1;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 12px;
+  width: 100%;
+}
+
+.equipmentButton:hover {
+  border-color: #e44848;
+  background-color: #fff5f5;
+}
+
+.equipmentButton.active {
+  background-color: #e44848;
+  color: white;
+  border-color: #e44848;
+}
+
+.equipmentIcon {
+  font-size: 20px;
+  margin-bottom: 4px;
+}
