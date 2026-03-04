@@ -1,18 +1,25 @@
-  .detailPage {
+.detailPage {
   padding: 40px 0;
+  margin: 48px 64px 80px 64px;
 }
 
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: block;
   margin-bottom: 16px;
 }
 
 .title {
-  font-size: 32px;
+  font-size: 24px;
   font-weight: 600;
   color: #101828;
+  margin: 0 0 8px 0;
+}
+
+.priceSection {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
 }
 
 .price {
@@ -25,7 +32,7 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  margin-bottom: 24px;
+  margin-bottom: 8px;
 }
 
 .rating {
@@ -34,37 +41,40 @@
   gap: 4px;
 }
 
-.star {
-  color: #ffc531;
-}
-
 .location {
   color: #475467;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .gallery {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  gap: 48px;
   margin-bottom: 24px;
 }
 
 .galleryImage {
-  width: 100%;
-  height: 200px;
+  width: 292px;
+  height: 312px;
+  border-radius: 10px;
   object-fit: cover;
-  border-radius: 12px;
+  object-position: 50% center;
 }
 
 .description {
   color: #475467;
   line-height: 1.6;
   margin-bottom: 32px;
+  font-weight: 400;
 }
 
 .tabs {
   display: flex;
   gap: 32px;
+  width: 100%;
+  height: 48px;
   border-bottom: 1px solid #dadde1;
   margin-bottom: 32px;
 }
@@ -78,6 +88,11 @@
   color: #475467;
   cursor: pointer;
   border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.tab:hover {
+  color: #e44848;
 }
 
 .tab.active {
@@ -93,6 +108,7 @@
 
 .mainContent {
   flex: 1;
+  border-radius: 10px;
 }
 
 .sectionTitle {
@@ -102,74 +118,175 @@
   margin: 24px 0 16px;
 }
 
-.featureGrid {
+/* Features Container */
+.featuresContainer {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  grid-template-columns: repeat(4, 1fr);
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 100px;
 }
 
-.featureItem {
-  padding: 12px;
+.features {
+  background-color: #F7F7F7;
+  padding: 44px 52px;
+  border-radius: 10px;
+}
+
+.feature {
+  width: 143px;
+  height: 48px;
+  padding: 12px 18px;
   background-color: #f2f4f7;
-  border-radius: 8px;
+  border-radius: 100px;
+  font-size: 16px;
+  color: #101828;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.featureIcon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+/* Vehicle Details Tablosu */
+.detailsTable {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-top: 1px #dadde1;
+  padding-top: 24px;
+}
+
+.detailsRow {
+  display: flex;
+}
+
+.detailsRow:last-child {
+  border-bottom: none;
+}
+
+.detailsLabel {
+  flex: 1;
+  padding: 12px 16px;
+  font-weight: 500;
   color: #101828;
 }
 
-.detailsGrid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+.detailsValue {
+  flex: 1;
+  padding: 12px 16px;
+  color: #475467;
+  text-transform: capitalize;
 }
 
-.detailItem {
-  padding: 12px;
-  background-color: #f2f4f7;
-  border-radius: 8px;
-  color: #101828;
+/* Reviews Bölümü */
+.reviews {
+  background-color: white;
 }
 
 .reviewCard {
-  padding: 20px;
-  border: 1px solid #dadde1;
-  border-radius: 12px;
-  margin-bottom: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+  background-color: white;
+}
+
+.reviewCard:last-child {
+  border-bottom: none;
 }
 
 .reviewHeader {
   display: flex;
-  justify-content: space-between;
+  gap: 10px;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
+}
+
+.reviewerInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #f2f4f7 !important;
+  color: #e44848;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 500;
+  text-transform: uppercase;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.reviewPart {
+  display: block;
 }
 
 .reviewerName {
   font-weight: 600;
   color: #101828;
+  font-size: 16px;
+  margin-bottom: 4px;
+  display: block;
 }
 
+/* Yıldız stilleri */
 .reviewRating {
   display: flex;
   gap: 2px;
 }
 
+.reviewRating img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+
 .starFilled {
-  color: #ffc531;
+  filter: brightness(0) saturate(100%) invert(79%) sepia(52%) saturate(2468%) hue-rotate(359deg) brightness(104%) contrast(106%);
+}
+
+
+.starEmpty {
+  filter: grayscale(100%) brightness(0.8);
+  opacity: 0.5;
 }
 
 .reviewComment {
   color: #475467;
   line-height: 1.5;
+  margin: 0;
+  font-size: 14px;
+}
+
+.noReviews {
+  color: #475467;
+  text-align: center;
+  padding: 40px;
 }
 
 .sidebar {
   position: sticky;
   top: 100px;
+  height: fit-content;
 }
 
 .bookingForm {
-  padding: 24px;
+  width: 641px;
+  height: 588px;
+  padding: 44px 57px;
   border: 1px solid #dadde1;
-  border-radius: 12px;
+  border-radius: 10px;
   background-color: white;
 }
 
@@ -181,17 +298,21 @@
 }
 
 .formSubtitle {
+  font-weight: 400;
   color: #475467;
   margin-bottom: 24px;
 }
 
 .formInput {
-  width: 100%;
+  width: 527px;
+  height: 60px;
   padding: 12px;
   border: 1px solid #dadde1;
   border-radius: 8px;
   margin-bottom: 16px;
+  background-color: #f7f7f7;
   font-size: 14px;
+  transition: all 0.3s ease;
 }
 
 .formInput:focus {
@@ -200,13 +321,16 @@
 }
 
 .formTextarea {
-  width: 100%;
+  width: 527px;
+  height: 118px;
   padding: 12px;
   border: 1px solid #dadde1;
   border-radius: 8px;
+  background-color: #f7f7f7;
   margin-bottom: 24px;
   font-size: 14px;
   resize: vertical;
+  transition: all 0.3s ease;
 }
 
 .formTextarea:focus {
@@ -215,7 +339,11 @@
 }
 
 .submitButton {
-  width: 100%;
+  width: 166px;
+  height: 56px;
+  justify-content: center;
+  align-items: center;
+  margin: 0 180px 44px 180px;
 }
 
 .error {
@@ -230,4 +358,17 @@
   color: #475467;
   padding: 40px;
   font-size: 18px;
+}
+
+/* İkon stilleri */
+.starIcon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.locationIcon {
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
 }

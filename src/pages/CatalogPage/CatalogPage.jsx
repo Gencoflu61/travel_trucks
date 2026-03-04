@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getCampers, clearCampers, incrementPage } from '../../redux/slices/campersSlice';
 import CamperList from '../../components/campers/CamperList/CamperList';
@@ -13,30 +13,14 @@ const CatalogPage = () => {
   const dispatch = useDispatch();
   const { items, loading, page, limit, total } = useSelector((state) => state.campers);
   const filters = useSelector((state) => state.filters);
+  
+  
+  const [searchTriggered, setSearchTriggered] = useState(false);
 
+  
   useEffect(() => {
-    console.log('Filtreler değişti:', filters);
-    
-    // Filtreleri API parametrelerine dönüştür
-    const filterParams = buildFilterParams();
-    console.log('API parametreleri:', filterParams);
-    
-    // Sayfa 1'den başla
-    dispatch(clearCampers());
-    dispatch(getCampers({ ...filterParams, page: 1, limit }));
-  }, [
-    filters.location, 
-    filters.vehicleType,
-    filters.equipment.AC,
-    filters.equipment.bathroom,
-    filters.equipment.kitchen,
-    filters.equipment.TV,
-    filters.equipment.radio,
-    filters.equipment.refrigerator,
-    filters.equipment.microwave,
-    filters.equipment.gas,
-    filters.equipment.water
-  ]);
+    handleSearch();
+  }, []);
 
   const buildFilterParams = () => {
     const params = {
@@ -54,7 +38,7 @@ const CatalogPage = () => {
       params.form = filters.vehicleType;
     }
     
-    // Ek ekipman filtreleri - sadece true olanları ekle
+    // Ek ekipman filtreleri 
     Object.entries(filters.equipment).forEach(([key, value]) => {
       if (value === true) {
         params[key] = true;
@@ -62,6 +46,18 @@ const CatalogPage = () => {
     });
     
     return params;
+  };
+
+ 
+  const handleSearch = () => {
+    console.log('Arama yapılıyor...', filters);
+    
+    const filterParams = buildFilterParams();
+    console.log('Arama parametreleri:', filterParams);
+    
+    dispatch(clearCampers());
+    dispatch(getCampers({ ...filterParams, page: 1, limit }));
+    setSearchTriggered(true);
   };
 
   const handleLoadMore = () => {
@@ -72,21 +68,38 @@ const CatalogPage = () => {
     dispatch(getCampers({ ...filterParams, page: nextPage, limit }));
   };
 
-  // Yüklenecek daha fazla kart var mı kontrol et
+  // Yüklenecek daha fazla kart var mı kontrol etme
   const hasMore = items.length < total;
+
+  // Aktif filtre var mı kontrol etme
+  const hasActiveFilters = () => {
+    if (filters.location && filters.location.trim() !== '') return true;
+    if (filters.vehicleType && filters.vehicleType !== '') return true;
+    
+    return Object.values(filters.equipment).some(value => value === true);
+  };
 
   return (
     <div className={styles.catalogPage}>
       <div className="container">
         <div className={styles.catalogLayout}>
           <aside className={styles.filtersSidebar}>
-            <h2 className={styles.filtersTitle}>Filters</h2>
             <LocationFilter />
-            <VehicleTypeFilter />
+            <h2 className={styles.filtersTitle}>Filters</h2>
+            
             <EquipmentFilter />
+            <VehicleTypeFilter />
             
-            {/* BURADAKİ TEST DİV'İ KALDIRDIK */}
-            
+            <div className={styles.searchButtonContainer}>
+              <Button 
+                onClick={handleSearch} 
+                variant="primary"
+                disabled={loading}
+                className={styles.searchButton}
+              >
+                {loading ? 'Searching...' : 'Search'}
+              </Button>
+            </div>
           </aside>
 
           <main className={styles.catalogMain}>
@@ -101,20 +114,31 @@ const CatalogPage = () => {
                     {hasMore && (
                       <div className={styles.loadMoreContainer}>
                         <Button 
+                         className={styles.loadMore}
                           onClick={handleLoadMore} 
                           variant="secondary"
                           disabled={loading}
                         >
-                          {loading ? 'Yükleniyor...' : 'Daha Fazla Göster'}
+                          {loading ? 'Loading...' : 'Load More'}
                         </Button>
                       </div>
                     )}
                   </>
                 ) : (
-                  !loading && (
-                    <p className={styles.noResults}>
-                      Kriterlerinize uygun kampçı bulunamadı.
-                    </p>
+                  !loading && searchTriggered && (
+                    <div className={styles.noResultsContainer}>
+                      {hasActiveFilters() ? (
+                        // Filtre var ama sonuç yok
+                        <p className={styles.noResults}>
+                           No campers found matching your criteria.
+                        </p>
+                      ) : (
+                        // Hiç filtre yok ve sonuç yok
+                        <p className={styles.noResults}>
+                          No campers available at the moment.
+                        </p>
+                      )}
+                    </div>
                   )
                 )}
               </>

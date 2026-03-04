@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import Header from "./components/layout/Header/Header"; 
-import Footer from "./components/layout/Footer/Footer"; 
 import HomePage from "./pages/HomePage/HomePage"; 
 import CatalogPage from "./pages/CatalogPage/CatalogPage"; 
 import CamperDetailPage from "./pages/CamperDetailPage/CamperDetailPage"; 
@@ -22,8 +21,7 @@ function App() {
               <Route path="/catalog/:id" element={<CamperDetailPage />} />
             </Routes>
           </main>
-          <Footer />
-        </div>
+          </div>
       </Router>
     </Provider>
   );

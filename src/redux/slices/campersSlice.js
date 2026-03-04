@@ -66,7 +66,7 @@ const campersSlice = createSlice({
           if (state.page === 1) {
             state.items = action.payload.items || [];
           } else {
-            // Yeni gelenleri ekle (tekrar edenleri önle)
+            
             const newItems = action.payload.items || [];
             const existingIds = new Set(state.items.map(item => item.id));
             const uniqueNewItems = newItems.filter(item => !existingIds.has(item.id));

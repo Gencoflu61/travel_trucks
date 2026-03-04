@@ -24,6 +24,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: var(--text-primary);
   background-color: var(--white);
+  font-size: 16px;
 }
 
 .app {
@@ -34,13 +35,11 @@ body {
 
 .main-content {
   flex: 1;
-  padding-top: 80px; /* Header yüksekliği kadar */
+  padding-top: 80px;
 }
 
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
+  max-width: 1440px;
 }
 
 button {
@@ -64,7 +63,11 @@ img {
   max-width: 100%;
   height: auto;
 }
-
+span {
+ color: #101828;
+ font-weight: 500;
+ font-size: 16px;
+}
 /* Loader */
 .loader-container {
   display: flex;

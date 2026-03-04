@@ -15,10 +15,10 @@ const HomePage = () => {
       <div className={styles.heroSection}>
         <div className="container">
           <h1 className={styles.title}>
-            Discover Your Next Adventure with TravelTrucks
+            Campers of your dreams
           </h1>
           <p className={styles.subtitle}>
-            Explore our wide range of campers and hit the road in style
+            You can find everything you want in our catalog
           </p>
           <Button onClick={handleViewNow} variant="primary">
             View Now

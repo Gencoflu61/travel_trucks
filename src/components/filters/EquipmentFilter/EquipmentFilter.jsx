@@ -1,18 +1,22 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleEquipment } from '../../../redux/slices/filtersSlice';
+
+// SVG ikonları
+import AcIcon from '../../../assets/images/icons/ac.svg';
+import BathroomIcon from '../../../assets/images/icons/bathroom.svg';
+import KitchenIcon from '../../../assets/images/icons/kitchen.svg';
+import TvIcon from '../../../assets/images/icons/tv.svg';
+import AutomaticIcon from '../../../assets/images/icons/automatic.svg';
+
 import styles from './EquipmentFilter.module.css';
 
 const equipmentList = [
-  { id: 'AC', label: 'AC', icon: '❄️' },
-  { id: 'bathroom', label: 'Bathroom', icon: '🚽' },
-  { id: 'kitchen', label: 'Kitchen', icon: '🍳' },
-  { id: 'TV', label: 'TV', icon: '📺' },
-  { id: 'radio', label: 'Radio', icon: '📻' },
-  { id: 'refrigerator', label: 'Refrigerator', icon: '🧊' },
-  { id: 'microwave', label: 'Microwave', icon: '🔥' },
-  { id: 'gas', label: 'Gas', icon: '⛽' },
-  { id: 'water', label: 'Water', icon: '💧' },
+  { id: 'AC', label: 'AC', icon: AcIcon },
+  { id: 'automatic', label: 'Automatic', icon: AutomaticIcon },
+  { id: 'kitchen', label: 'Kitchen', icon: KitchenIcon },
+  { id: 'bathroom', label: 'Bathroom', icon: BathroomIcon },
+  { id: 'TV', label: 'TV', icon: TvIcon },
 ];
 
 const EquipmentFilter = () => {
@@ -20,13 +24,8 @@ const EquipmentFilter = () => {
   const equipment = useSelector((state) => state.filters.equipment);
 
   const handleEquipmentToggle = (equipId) => {
-    console.log('Tıklanan ekipman:', equipId);
-    console.log('Önceki durum:', equipment[equipId]);
     dispatch(toggleEquipment(equipId));
   };
-
-  // Debug için
-  console.log('EquipmentFilter render edildi, equipment state:', equipment);
 
   return (
     <div className={styles.filterGroup}>
@@ -41,7 +40,11 @@ const EquipmentFilter = () => {
             onClick={() => handleEquipmentToggle(item.id)}
             type="button"
           >
-            <span className={styles.equipmentIcon}>{item.icon}</span>
+            <img 
+              src={item.icon} 
+              alt={item.label} 
+              className={styles.equipmentIcon}
+            />
             <span>{item.label}</span>
           </button>
         ))}

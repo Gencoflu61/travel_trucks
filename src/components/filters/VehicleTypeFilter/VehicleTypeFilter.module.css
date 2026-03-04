@@ -3,25 +3,32 @@
 }
 
 .filterTitle {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 600;
   color: #101828;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #DADDE1;
+  padding-bottom: 24px;
 }
 
 .vehicleTypes {
   display: flex;
-  gap: 8px;
+  gap: 12px;
   flex-wrap: wrap;
 }
 
 .typeButton {
-  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 12px;
   border: 1px solid #dadde1;
   border-radius: 8px;
-  background: none;
+  background: white;
   cursor: pointer;
   transition: all 0.3s ease;
+  min-width: 100px;
 }
 
 .typeButton:hover {
@@ -32,4 +39,15 @@
   background-color: #e44848;
   color: white;
   border-color: #e44848;
+}
+
+.typeButton.active .typeIcon {
+  filter: brightness(0) invert(1); 
+}
+
+.typeIcon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  margin-bottom: 4px;
 }

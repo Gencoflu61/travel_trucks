@@ -1,15 +1,14 @@
 .filterGroup {
   margin-bottom: 24px;
-  border: 1px solid #eee;
-  padding: 16px;
-  border-radius: 8px;
 }
 
 .filterTitle {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 600;
   color: #101828;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #DADDE1;
+  padding-bottom: 24px;
 }
 
 .equipmentGrid {
@@ -43,8 +42,14 @@
   color: white;
   border-color: #e44848;
 }
-
 .equipmentIcon {
+  width: 24px;
+  height: 24px;
   font-size: 20px;
+  object-fit: contain;
   margin-bottom: 4px;
+}
+
+.equipmentButton.active .equipmentIcon {
+  filter: brightness(0) invert(1); 
 }

@@ -1,6 +1,7 @@
 .button {
-  padding: 12px 24px;
-  border-radius: 8px;
+  width: 166px;
+  height: 56px;
+  border-radius: 200px;
   font-size: 16px;
   font-weight: 500;
   transition: var(--transition);
@@ -11,6 +12,7 @@
 .button.primary {
   background-color: var(--primary-color);
   color: var(--white);
+  
 }
 
 .button.primary:hover:not(:disabled) {

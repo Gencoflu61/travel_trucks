@@ -6,23 +6,20 @@ const api = axios.create({
   baseURL: BASE_URL,
 });
 
-// Tüm kampçıları getir (filtresiz)
+
 export const fetchAllCampers = async () => {
   try {
     const response = await api.get('/campers');
     console.log('API ham cevap:', response.data);
     
-    // API'den gelen veri yapısını kontrol et
+    
     let campersData = [];
     
     if (Array.isArray(response.data)) {
-      // Eğer direkt dizi gelirse
       campersData = response.data;
     } else if (response.data && response.data.items && Array.isArray(response.data.items)) {
-      // Eğer { items: [] } şeklinde gelirse
       campersData = response.data.items;
     } else if (response.data && response.data.data && Array.isArray(response.data.data)) {
-      // Eğer { data: [] } şeklinde gelirse
       campersData = response.data.data;
     } else {
       console.error('Beklenmeyen veri yapısı:', response.data);
@@ -37,13 +34,10 @@ export const fetchAllCampers = async () => {
   }
 };
 
-// Filtreli kampçıları getir (frontend'de filtreleme yapılır)
 export const fetchCampers = async (params = {}) => {
   try {
-    // Önce tüm verileri çek
     const allCampers = await fetchAllCampers();
     
-    // allCampers'ın dizi olduğundan emin ol
     if (!Array.isArray(allCampers)) {
       console.error('allCampers bir dizi değil:', allCampers);
       return {
@@ -55,7 +49,7 @@ export const fetchCampers = async (params = {}) => {
     console.log('Filtreleme başlıyor. Toplam kampçı:', allCampers.length);
     console.log('Filtreleme parametreleri:', params);
     
-    // Frontend'de filtreleme yap
+   
     let filteredCampers = [...allCampers];
     
     // Lokasyon filtresi

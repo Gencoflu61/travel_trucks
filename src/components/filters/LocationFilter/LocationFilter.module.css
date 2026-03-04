@@ -4,21 +4,43 @@
 
 .filterLabel {
   display: block;
-  font-size: 14px;
-  font-weight: 500;
-  color: #475467;
+  font-size: 16px;
+  font-weight: 400;
+  color: #6C717B;
   margin-bottom: 8px;
+}
+
+.inputWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  pointer-events: none;
+  opacity: 0.6;
 }
 
 .locationInput {
   width: 100%;
-  padding: 12px;
+  padding: 12px 12px 12px 38px; 
   border: 1px solid #dadde1;
   border-radius: 8px;
   font-size: 14px;
+  transition: all 0.3s ease;
 }
 
 .locationInput:focus {
   outline: none;
   border-color: #e44848;
+}
+
+.locationInput:focus + .inputIcon {
+  color: #e44848;
 }

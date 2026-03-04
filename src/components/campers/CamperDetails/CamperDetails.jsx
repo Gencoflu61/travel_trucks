@@ -7,6 +7,20 @@ import Notification from '../../components/common/Notification/Notification';
 import Button from '../../components/common/Button/Button';
 import styles from './CamperDetailPage.module.css';
 
+// SVG ikonları
+import AcIcon from '../../../assets/images/icons/ac.svg';
+import BathroomIcon from '../../../assets/images/icons/bathroom.svg';
+import KitchenIcon from '../../../assets/images/icons/kitchen.svg';
+import TvIcon from '../../../assets/images/icons/tv.svg';
+import RadioIcon from '../../../assets/images/icons/radio.svg';
+import RefrigeratorIcon from '../../../assets/images/icons/refrigerator.svg';
+import MicrowaveIcon from '../../../assets/images/icons/microwave.svg';
+import GasIcon from '../../../assets/images/icons/gas.svg';
+import WaterIcon from '../../../assets/images/icons/water.svg';
+import EngineIcon from '../../../assets/images/icons/fuel-pump.svg';
+import AutomaticIcon from '../../../assets/images/icons/automatic.svg';
+import LocationIcon from '../../assets/images/icons/map.svg';
+
 const CamperDetailPage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -45,13 +59,11 @@ const CamperDetailPage = () => {
       return;
     }
 
-    // Başarılı rezervasyon mesajı
     setNotification({
       type: 'success',
       message: 'Booking successful! We will contact you soon.'
     });
 
-    // Formu temizle
     setFormData({
       name: '',
       email: '',
@@ -59,6 +71,25 @@ const CamperDetailPage = () => {
       comment: '',
     });
   };
+  // Özellik ikonları
+    const getFeatureIcon = (feature) => {
+      const icons = {
+        engine: EngineIcon,
+        AC: AcIcon,
+        automatic: AutomaticIcon,
+        bathroom: BathroomIcon,
+        kitchen: KitchenIcon,
+        TV: TvIcon,
+        radio: RadioIcon,
+        refrigerator: RefrigeratorIcon,
+        microwave: MicrowaveIcon,
+        gas: GasIcon,
+        water: WaterIcon,
+      };
+      
+      const IconComponent = icons[feature];
+      return IconComponent ? <img src={IconComponent} alt={feature} className={styles.featureIcon} /> : null;
+    };
 
   const formatPrice = (price) => {
     return price?.toFixed(2) || '0.00';
@@ -94,7 +125,7 @@ const CamperDetailPage = () => {
             <span>{camper.rating || 0} ({camper.reviews?.length || 0} reviews)</span>
           </div>
           <div className={styles.location}>
-            📍 {camper.location}
+            <img src={LocationIcon} alt="location" className={styles.locationIcon} /> {camper.location}
           </div>
         </div>
 
@@ -135,42 +166,63 @@ const CamperDetailPage = () => {
             {activeTab === 'features' ? (
               <div className={styles.features}>
                 <h3 className={styles.sectionTitle}>Vehicle Features</h3>
-                <div className={styles.featureGrid}>
-                  {/* Temel Özellikler */}
-                  {camper.transmission && (
-                    <div className={styles.featureItem}>⚙️ Transmission: {camper.transmission}</div>
-                  )}
-                  {camper.engine && (
-                    <div className={styles.featureItem}>🔧 Engine: {camper.engine}</div>
-                  )}
-                  {camper.AC && (
-                    <div className={styles.featureItem}>❄️ AC</div>
-                  )}
-                  {camper.bathroom && (
-                    <div className={styles.featureItem}>🚽 Bathroom</div>
-                  )}
-                  {camper.kitchen && (
-                    <div className={styles.featureItem}>🍳 Kitchen</div>
-                  )}
-                  {camper.TV && (
-                    <div className={styles.featureItem}>📺 TV</div>
-                  )}
-                  {camper.radio && (
-                    <div className={styles.featureItem}>📻 Radio</div>
-                  )}
-                  {camper.refrigerator && (
-                    <div className={styles.featureItem}>🧊 Refrigerator</div>
-                  )}
-                  {camper.microwave && (
-                    <div className={styles.featureItem}>🔥 Microwave</div>
-                  )}
-                  {camper.gas && (
-                    <div className={styles.featureItem}>⛽ Gas</div>
-                  )}
-                  {camper.water && (
-                    <div className={styles.featureItem}>💧 Water</div>
-                  )}
-                </div>
+                <div className={styles.features}>
+                          {camper.automatic && (
+                            <span className={styles.feature}>
+                              {getFeatureIcon('automatic')} {camper.automatic}
+                            </span>
+                          )}
+                          {camper.engine && (
+                            <span className={styles.feature}>
+                              {getFeatureIcon('engine')} {camper.engine}
+                            </span>
+                          )}
+                          {camper.AC && (
+                            <span className={styles.feature}>
+                              {getFeatureIcon('AC')} AC
+                            </span>
+                          )}
+                          {camper.bathroom && (
+                            <span className={styles.feature}>
+                              {getFeatureIcon('bathroom')} Bathroom
+                            </span>
+                          )}
+                          {camper.kitchen && (
+                            <span className={styles.feature}>
+                              {getFeatureIcon('kitchen')} Kitchen
+                            </span>
+                          )}
+                          {camper.TV && (
+                            <span className={styles.feature}>
+                              {getFeatureIcon('TV')} TV
+                            </span>
+                          )}
+                          {camper.radio && (
+                            <span className={styles.feature}>
+                              {getFeatureIcon('radio')} Radio
+                            </span>
+                          )}
+                          {camper.refrigerator && (
+                            <span className={styles.feature}>
+                              {getFeatureIcon('refrigerator')} Refrigerator
+                            </span>
+                          )}
+                          {camper.microwave && (
+                            <span className={styles.feature}>
+                              {getFeatureIcon('microwave')} Microwave
+                            </span>
+                          )}
+                          {camper.gas && (
+                            <span className={styles.feature}>
+                              {getFeatureIcon('gas')} Gas
+                            </span>
+                          )}
+                          {camper.water && (
+                            <span className={styles.feature}>
+                              {getFeatureIcon('water')} Water
+                            </span>
+                          )}
+                        </div>
 
                 <h3 className={styles.sectionTitle}>Vehicle Details</h3>
                 <div className={styles.detailsGrid}>
@@ -193,7 +245,7 @@ const CamperDetailPage = () => {
                         <div className={styles.reviewRating}>
                           {[...Array(5)].map((_, i) => (
                             <span key={i} className={i < review.rating ? styles.starFilled : styles.star}>
-                              ★
+                              <img src={LocationIcon} alt="location" className={styles.locationIcon} />
                             </span>
                           ))}
                         </div>

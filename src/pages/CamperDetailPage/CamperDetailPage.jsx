@@ -7,6 +7,21 @@ import Notification from '../../components/common/Notification/Notification';
 import Button from '../../components/common/Button/Button';
 import styles from './CamperDetailPage.module.css';
 
+// SVG ikonları
+import AcIcon from '../../assets/images/icons/ac.svg';
+import BathroomIcon from '../../assets/images/icons/bathroom.svg';
+import KitchenIcon from '../../assets/images/icons/kitchen.svg';
+import TvIcon from '../../assets/images/icons/tv.svg';
+import RadioIcon from '../../assets/images/icons/radio.svg';
+import RefrigeratorIcon from '../../assets/images/icons/refrigerator.svg';
+import MicrowaveIcon from '../../assets/images/icons/microwave.svg';
+import GasIcon from '../../assets/images/icons/gas.svg';
+import WaterIcon from '../../assets/images/icons/water.svg';
+import EngineIcon from '../../assets/images/icons/fuel-pump.svg';
+import AutomaticIcon from '../../assets/images/icons/automatic.svg';
+import LocationIcon from '../../assets/images/icons/map.svg';
+import StarFilledIcon from '../../assets/images/icons/star-outline.svg'; 
+import StarEmptyIcon from '../../assets/images/icons/star.svg'; 
 const CamperDetailPage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -57,6 +72,25 @@ const CamperDetailPage = () => {
     });
   };
 
+  const getFeatureIcon = (feature) => {
+    const icons = {
+      petrol: EngineIcon,
+      AC: AcIcon,
+      automatic: AutomaticIcon,
+      bathroom: BathroomIcon,
+      kitchen: KitchenIcon,
+      TV: TvIcon,
+      radio: RadioIcon,
+      refrigerator: RefrigeratorIcon,
+      microwave: MicrowaveIcon,
+      gas: GasIcon,
+      water: WaterIcon,
+    };
+    
+    const IconComponent = icons[feature];
+    return IconComponent ? <img src={IconComponent} alt={feature} className={styles.featureIcon} /> : null;
+  };
+
   const formatPrice = (price) => {
     return price?.toFixed(2) || '0.00';
   };
@@ -78,18 +112,18 @@ const CamperDetailPage = () => {
 
         <div className={styles.header}>
           <h1 className={styles.title}>{camper.name}</h1>
+          <div className={styles.ratingLocation}>
+            <div className={styles.rating}>
+              <img src={StarFilledIcon} alt="star" className={styles.starIcon} />
+              <span>{camper.rating || 0} ({camper.reviews?.length || 0} reviews)</span>
+            </div>
+            <div className={styles.location}>
+              <img src={LocationIcon} alt="location" className={styles.locationIcon} />
+              <span>{camper.location}</span>
+            </div>
+          </div>
           <div className={styles.priceSection}>
             <span className={styles.price}>€{formatPrice(camper.price)}</span>
-          </div>
-        </div>
-
-        <div className={styles.ratingLocation}>
-          <div className={styles.rating}>
-            <span className={styles.star}>★</span>
-            <span>{camper.rating || 0} ({camper.reviews?.length || 0} reviews)</span>
-          </div>
-          <div className={styles.location}>
-            📍 {camper.location}
           </div>
         </div>
 
@@ -125,75 +159,128 @@ const CamperDetailPage = () => {
           <div className={styles.mainContent}>
             {activeTab === 'features' ? (
               <div className={styles.features}>
-                <h3 className={styles.sectionTitle}>Vehicle Features</h3>
-                <div className={styles.featureGrid}>
-                  {camper.transmission && (
-                    <div className={styles.featureItem}>⚙️ Transmission: {camper.transmission}</div>
+                <div className={styles.featuresContainer}>
+                  {camper.automatic && (
+                    <span className={styles.feature}>
+                      {getFeatureIcon('automatic')} Automatic
+                    </span>
                   )}
                   {camper.engine && (
-                    <div className={styles.featureItem}>🔧 Engine: {camper.engine}</div>
+                    <span className={styles.feature}>
+                      {getFeatureIcon('petrol')} {camper.engine}
+                    </span>
                   )}
                   {camper.AC && (
-                    <div className={styles.featureItem}>❄️ AC</div>
+                    <span className={styles.feature}>
+                      {getFeatureIcon('AC')} AC
+                    </span>
                   )}
                   {camper.bathroom && (
-                    <div className={styles.featureItem}>🚽 Bathroom</div>
+                    <span className={styles.feature}>
+                      {getFeatureIcon('bathroom')} Bathroom
+                    </span>
                   )}
                   {camper.kitchen && (
-                    <div className={styles.featureItem}>🍳 Kitchen</div>
+                    <span className={styles.feature}>
+                      {getFeatureIcon('kitchen')} Kitchen
+                    </span>
                   )}
                   {camper.TV && (
-                    <div className={styles.featureItem}>📺 TV</div>
+                    <span className={styles.feature}>
+                      {getFeatureIcon('TV')} TV
+                    </span>
                   )}
                   {camper.radio && (
-                    <div className={styles.featureItem}>📻 Radio</div>
+                    <span className={styles.feature}>
+                      {getFeatureIcon('radio')} Radio
+                    </span>
                   )}
                   {camper.refrigerator && (
-                    <div className={styles.featureItem}>🧊 Refrigerator</div>
+                    <span className={styles.feature}>
+                      {getFeatureIcon('refrigerator')} Refrigerator
+                    </span>
                   )}
                   {camper.microwave && (
-                    <div className={styles.featureItem}>🔥 Microwave</div>
+                    <span className={styles.feature}>
+                      {getFeatureIcon('microwave')} Microwave
+                    </span>
                   )}
                   {camper.gas && (
-                    <div className={styles.featureItem}>⛽ Gas</div>
+                    <span className={styles.feature}>
+                      {getFeatureIcon('gas')} Gas
+                    </span>
                   )}
                   {camper.water && (
-                    <div className={styles.featureItem}>💧 Water</div>
+                    <span className={styles.feature}>
+                      {getFeatureIcon('water')} Water
+                    </span>
                   )}
                 </div>
 
                 <h3 className={styles.sectionTitle}>Vehicle Details</h3>
-                <div className={styles.detailsGrid}>
-                  <div className={styles.detailItem}>Form: {camper.form || 'N/A'}</div>
-                  <div className={styles.detailItem}>Length: {camper.length || 'N/A'}</div>
-                  <div className={styles.detailItem}>Width: {camper.width || 'N/A'}</div>
-                  <div className={styles.detailItem}>Height: {camper.height || 'N/A'}</div>
-                  <div className={styles.detailItem}>Tank: {camper.tank || 'N/A'}</div>
-                  <div className={styles.detailItem}>Consumption: {camper.consumption || 'N/A'}</div>
+                <div className={styles.detailsTable}>
+                  <div className={styles.detailsRow}>
+                    <span className={styles.detailsLabel}>Form</span>
+                    <span className={styles.detailsValue}>{camper.form || 'Panel truck'}</span>
+                  </div>
+                  <div className={styles.detailsRow}>
+                    <span className={styles.detailsLabel}>Length</span>
+                    <span className={styles.detailsValue}>{camper.length || '5.4 m'}</span>
+                  </div>
+                  <div className={styles.detailsRow}>
+                    <span className={styles.detailsLabel}>Width</span>
+                    <span className={styles.detailsValue}>{camper.width || '2.01 m'}</span>
+                  </div>
+                  <div className={styles.detailsRow}>
+                    <span className={styles.detailsLabel}>Height</span>
+                    <span className={styles.detailsValue}>{camper.height || '2.05 m'}</span>
+                  </div>
+                  <div className={styles.detailsRow}>
+                    <span className={styles.detailsLabel}>Tank</span>
+                    <span className={styles.detailsValue}>{camper.tank || '132 l'}</span>
+                  </div>
+                  <div className={styles.detailsRow}>
+                    <span className={styles.detailsLabel}>Consumption</span>
+                    <span className={styles.detailsValue}>{camper.consumption || '12.4l/100km'}</span>
+                  </div>
                 </div>
               </div>
             ) : (
               <div className={styles.reviews}>
-                <h3 className={styles.sectionTitle}>Customer Reviews</h3>
-                {camper.reviews?.length > 0 ? (
-                  camper.reviews.map((review, index) => (
+                {camper.reviews?.map((review, index) => {
+                  const ratingValue = review.reviewer_rating || 0;
+                  
+                  const avatarColors = ['#e44848', '#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffcc5c', '#ff6f69'];
+                  
+                  return (
                     <div key={index} className={styles.reviewCard}>
                       <div className={styles.reviewHeader}>
-                        <span className={styles.reviewerName}>{review.reviewer_name}</span>
-                        <div className={styles.reviewRating}>
-                          {[...Array(5)].map((_, i) => (
-                            <span key={i} className={i < review.rating ? styles.starFilled : styles.star}>
-                              ★
-                            </span>
-                          ))}
+                        <div className={styles.reviewerInfo}>
+                          <div 
+                            className={styles.avatar} 
+                            style={{ backgroundColor: avatarColors[index % avatarColors.length] }}
+                          >
+                            {review.reviewer_name?.charAt(0)?.toUpperCase() || '?'}
+                          </div>
+                        </div>
+                        <div className={styles.reviewPart}>
+                          <span className={styles.reviewerName}>{review.reviewer_name || 'Anonymous'}</span>
+                          <div className={styles.reviewRating}>
+                            {[1, 2, 3, 4, 5].map((star) => (
+                              <img 
+                                key={star}
+                                src={star <= ratingValue ? StarFilledIcon : StarEmptyIcon}
+                                alt="star"
+                                className={star <= ratingValue ? styles.starFilled : styles.starEmpty}
+                              />
+                            ))}
+                          </div>
                         </div>
                       </div>
-                      <p className={styles.reviewComment}>{review.comment}</p>
+                      <p className={styles.reviewComment}>{review.comment || ''}</p>
                     </div>
-                  ))
-                ) : (
-                  <p>No reviews yet</p>
-                )}
+                  );
+                })}
               </div>
             )}
           </div>
@@ -227,6 +314,7 @@ const CamperDetailPage = () => {
                 <input
                   type="date"
                   name="date"
+                  placeholder='Booking date*'
                   value={formData.date}
                   onChange={handleInputChange}
                   className={styles.formInput}

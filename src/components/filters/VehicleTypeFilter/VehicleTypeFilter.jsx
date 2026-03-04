@@ -3,10 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setVehicleType } from '../../../redux/slices/filtersSlice';
 import styles from './VehicleTypeFilter.module.css';
 
+// SVG ikonları
+import Alcove from '../../../assets/images/icons/alcove.svg';
+import Fully from '../../../assets/images/icons/fully.svg';
+import Van from '../../../assets/images/icons/van.svg';
+
 const vehicleTypes = [
-  { id: 'alcove', label: 'Alcove' },
-  { id: 'fullyIntegrated', label: 'Fully Integrated' },
-  { id: 'panelTruck', label: 'Panel Truck' },
+  { id: 'van', label: 'Van', icon: Van },
+  { id: 'fullyIntegrated', label: 'Fully Integrated', icon: Fully },
+  { id: 'alcove', label: 'Alcove', icon: Alcove },
 ];
 
 const VehicleTypeFilter = () => {
@@ -29,7 +34,8 @@ const VehicleTypeFilter = () => {
             }`}
             onClick={() => handleTypeChange(type.id)}
           >
-            {type.label}
+            <img src={type.icon} alt={type.label} className={styles.typeIcon} />
+            <span>{type.label}</span>
           </button>
         ))}
       </div>

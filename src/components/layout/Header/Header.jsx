@@ -13,7 +13,7 @@ const Header = () => {
     <header className={styles.header}>
       <div className={`container ${styles.headerContainer}`}>
         <Link to="/" className={styles.logo}>
-          TravelTrucks
+          Travel<p className={styles.logoGrey}>Trucks</p>
         </Link>
         <nav className={styles.nav}>
           <Link to="/" className={`${styles.navLink} ${isActive('/')}`}>
